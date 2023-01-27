@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply text-sm md:text-base;
+  }
+
+  h1 {
+    @apply text-3xl font-semibold md:text-5xl;
+  }
+
+  h2 {
+    @apply text-2xl font-semibold md:text-4xl uppercase;
+  }
+
+  h3 {
+    @apply text-xl font-semibold md:text-3xl uppercase;
+  }
+
+  h4 {
+    @apply text-lg font-semibold;
+  }
+}
+
+body {
+  @apply bg-gray-900 text-gray-50 px-4;
+}
+
+#__next {
+  @apply min-h-screen flex flex-col space-y-4;
+}
+
+#__next > * {
+  @apply container max-w-[700px];
+}
+
+.prose a {
+  @apply font-normal border-b-primary border-b-2 no-underline;
+}
