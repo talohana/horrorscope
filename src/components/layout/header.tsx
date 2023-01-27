@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { BiGhost } from 'react-icons/bi';
+import { BuyMeACoffee } from '../common/buy-me-a-coffee';
 
 interface NavigationMeta {
   name: string;
@@ -26,11 +27,14 @@ export const Header: React.FC = () => {
   const links = navigation.map(meta => <NavLink key={meta.name} meta={meta} />);
   return (
     <div className="py-4 text-xl border-b border-b-primary">
-      <nav className="flex items-center space-x-2">
-        <div className="text-3xl text-primary">
-          <BiGhost />
+      <nav className="flex items-center justify-between">
+        <div className="flex space-x-2">
+          <div className="text-3xl text-primary">
+            <BiGhost />
+          </div>
+          <div>{links}</div>
         </div>
-        <div>{links}</div>
+        <BuyMeACoffee />
       </nav>
     </div>
   );
