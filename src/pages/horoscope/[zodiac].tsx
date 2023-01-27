@@ -5,6 +5,7 @@ import { GetServerSideProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import Typewriter, { TypewriterClass } from 'typewriter-effect';
+import winston from 'winston';
 
 type Props = {
   horoscope: GeneratedHoroscope;
@@ -54,23 +55,43 @@ const typeHoroscope = (
   typewriter.start();
 };
 
+const logger = winston.createLogger({
+  level: 'info',
+  format: winston.format.combine(
+    winston.format.colorize(),
+    winston.format.timestamp(),
+    winston.format.printf(
+      ({ level, message, timestamp }) => `[${timestamp}] ${level}: ${message}`
+    )
+  ),
+  transports: [new winston.transports.Console()],
+});
+
 export const getServerSideProps: GetServerSideProps<Props> = async ({
   query,
   res,
 }) => {
   const { zodiac } = query;
-  const horoscope = await generate(zodiac as string);
+  try {
+    const horoscope = await generate(zodiac as string);
+    logger.info(`generated horoscope [${zodiac}]`);
 
-  res.setHeader(
-    'Cache-Control',
-    'public, s-maxage=86400, stale-while-revalidate=86400, max-age=0'
-  );
+    res.setHeader(
+      'Cache-Control',
+      'public, s-maxage=86400, stale-while-revalidate=86400, max-age=0'
+    );
 
-  return {
-    props: {
-      horoscope,
-    },
-  };
+    return {
+      props: { horoscope },
+    };
+  } catch (error: any) {
+    logger.error(error);
+    return {
+      props: {
+        horoscope: { text: 'Something went wrong, please try again later.' },
+      },
+    };
+  }
 };
 
 export default Horoscope;
