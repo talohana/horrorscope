@@ -1,3 +1,4 @@
+import { GoogleAnalytics } from '@/components/common/google-analytics';
 import { Layout } from '@/components/layout/layout';
 import '@/styles/globals.css';
 import { defaultSEO } from '@/utils/next-seo-config';
@@ -11,6 +12,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <DefaultSeo {...defaultSEO} />
+      <GoogleAnalytics />
       <main
         className={`min-h-screen flex flex-col space-y-8 ${inter.className}`}
       >
