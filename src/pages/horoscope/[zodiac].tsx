@@ -61,7 +61,10 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
   const { zodiac } = query;
   const horoscope = await generate(zodiac as string);
 
-  res.setHeader('Cache-Control', 'public, s-maxage=86400, max-age=0');
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=86400, stale-while-revalidate=86400, max-age=0'
+  );
 
   return {
     props: {
