@@ -8,7 +8,7 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 const generatePrompt = (zodiac: string): string =>
-  `Write a horror theme horoscope for ${zodiac}`;
+  `Write a horror theme horoscope for ${zodiac} that contains 100 to 200 words.`;
 
 export const generate = async (zodiac: string): Promise<GeneratedHoroscope> => {
   if (process.env.NODE_ENV !== 'production') {
