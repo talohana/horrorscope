@@ -8,12 +8,12 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 const generatePrompt = (zodiac: string): string =>
-  `Write a horror theme horoscope for ${zodiac} that contains 100 to 200 words.`;
+  `Write a horror theme horoscope for ${zodiac}`;
 
 export const generate = async (zodiac: string): Promise<GeneratedHoroscope> => {
-  if (process.env.NODE_ENV !== 'production') {
-    return { text: LOREM };
-  }
+  // if (process.env.NODE_ENV !== 'production') {
+  //   return { text: LOREM };
+  // }
 
   if (!configuration.apiKey) {
     throw new Error('Invalid or missing API key');
@@ -23,6 +23,7 @@ export const generate = async (zodiac: string): Promise<GeneratedHoroscope> => {
     model: 'text-davinci-003',
     prompt: generatePrompt(zodiac),
     temperature: 0.6,
+    max_tokens: 200,
   });
 
   return { text: completion.data.choices[0].text || '' };
