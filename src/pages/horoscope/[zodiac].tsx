@@ -2,6 +2,7 @@ import { GeneratedHoroscope } from '@/interfaces/horoscope';
 import { generate } from '@/lib/horoscope';
 import { format } from 'date-fns';
 import { GetServerSideProps } from 'next';
+import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import Typewriter, { TypewriterClass } from 'typewriter-effect';
 
@@ -15,19 +16,22 @@ const Horoscope: React.FC<Props> = ({ horoscope }) => {
   const today = format(Date.now(), 'MMMM dd, yyyy');
 
   return (
-    <div className="container mb-12 space-y-8">
-      <div className="space-y-4">
-        <div className="space-y-2">
-          <h1 className="text-primary">{zodiac}</h1>
-          <h4>{today}</h4>
+    <>
+      <NextSeo title={zodiac as string} />
+      <div className="container mb-12 space-y-8">
+        <div className="space-y-4">
+          <div className="space-y-2">
+            <h1 className="text-primary">{zodiac}</h1>
+            <h4>{today}</h4>
+          </div>
+          <article className="prose prose-invert lg:prose-lg">
+            <Typewriter
+              onInit={typewriter => typeHoroscope(typewriter, horoscope)}
+            />
+          </article>
         </div>
-        <article className="prose prose-invert lg:prose-lg">
-          <Typewriter
-            onInit={typewriter => typeHoroscope(typewriter, horoscope)}
-          />
-        </article>
       </div>
-    </div>
+    </>
   );
 };
 
@@ -36,9 +40,12 @@ const typeHoroscope = (
   horoscope: GeneratedHoroscope
 ) => {
   typewriter.changeDelay(30);
-  const parts = horoscope.text.split(/(?<=\.)/);
+  const parts = horoscope.text.split('.');
   parts.forEach((part, i) => {
     typewriter.typeString(part);
+    if (i < parts.length - 1) {
+      typewriter.typeString('.');
+    }
     if (i % 2 == 0) {
       typewriter.typeString('<br />'.repeat(2));
     }

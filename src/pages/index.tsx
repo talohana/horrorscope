@@ -14,15 +14,13 @@ export default function Home() {
         <div className="prose prose-invert lg:prose-xl">
           <h1>Hi There!</h1>
           <p>
-            HorrorScope is a unique website that uses AI technology to generate
-            personalized horoscopes with a horror twist. Our algorithm analyzes
-            your astrological chart and combines it with elements of horror
-            fiction to create a truly spine-chilling experience. Whether
-            you&aposre a fan of ghosts, monsters, or psychological thrillers,
-            our horoscopes will give you a new perspective on your astrological
-            sign. With daily, weekly, and monthly horoscopes available,
-            HorrorScope is the perfect destination for anyone looking to add a
-            touch of the macabre to their daily routine.
+            Welcome to HorrorScope, the premier website for all things spooky
+            and astrological. Our unique AI-powered horoscope generator creates
+            personalized horror-themed horoscopes for each zodiac sign,
+            guaranteed to give you goosebumps. Whether you&apos;re a daring
+            Aries or a mysterious Scorpio, our horoscopes will delve into the
+            darker side of your astrological personality. So come in, read your
+            horoscope, and see what horrors the stars have in store for you.
           </p>
           <Image src={intro} quality={100} alt="intro" />
         </div>

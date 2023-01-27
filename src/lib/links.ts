@@ -5,4 +5,4 @@ export const links = {
   company: 'https://about.google.com',
 };
 
-export const siteUrl = 'https://horrorscope.co';
+export const siteUrl = 'https://horrorscope-co.vercel.app';
