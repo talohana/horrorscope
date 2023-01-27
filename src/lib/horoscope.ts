@@ -8,12 +8,12 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 const generatePrompt = (zodiac: string): string =>
-  `Write a horror theme horoscope for ${zodiac}`;
+  `Write a witty horror theme horoscope for ${zodiac} that contains at least 100 words`;
 
 export const generate = async (zodiac: string): Promise<GeneratedHoroscope> => {
-  // if (process.env.NODE_ENV !== 'production') {
-  //   return { text: LOREM };
-  // }
+  if (process.env.NODE_ENV !== 'production') {
+    return { text: LOREM };
+  }
 
   if (!configuration.apiKey) {
     throw new Error('Invalid or missing API key');

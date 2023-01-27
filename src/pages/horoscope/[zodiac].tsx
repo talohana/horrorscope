@@ -35,10 +35,14 @@ const typeHoroscope = (
   typewriter: TypewriterClass,
   horoscope: GeneratedHoroscope
 ) => {
-  typewriter.changeDelay(45);
+  typewriter.changeDelay(30);
   const parts = horoscope.text.split(/(?<=\.)/);
-  parts.forEach(part => {
-    typewriter.typeString(part).pauseFor(Math.random() * 1000);
+  parts.forEach((part, i) => {
+    typewriter.typeString(part);
+    if (i % 2 == 0) {
+      typewriter.typeString('<br />'.repeat(2));
+    }
+    typewriter.pauseFor(Math.random() * 1000);
   });
   typewriter.start();
 };
